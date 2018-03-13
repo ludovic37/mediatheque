@@ -15,10 +15,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MediaController extends Controller
+/**
+ * @Route("/films")
+ *
+ */
+class FilmController extends Controller
 {
     /**
-     * @Route("/films", name="films")
+     * @Route("/", name="films")
      */
     public function films(){
 
@@ -28,7 +32,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/films/add/", name="add_film")
+     * @Route("/add/", name="add_film")
      */
     public function addFilm(Request $request){
 
@@ -64,15 +68,15 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/films/datail/{id}", name="detail_film")
+     * @Route("/datail/{id}", name="detail_film")
      */
     public function detailFilm(Film $film){
 
-        return $this->render('film/detail.html.twig', array("film" => $film));
+        return $this->render('film/film_detail.html.twig', array("film" => $film));
     }
 
     /**
-     * @Route("/films/edit/{id}", name="edit_film")
+     * @Route("/edit/{id}", name="edit_film")
      */
     public function editFilm(Film $film, Request $request){
         //$films = $this->getDoctrine()->getRepository(Media::class)->findAllFilm();
@@ -108,7 +112,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/films/delete/{id}", name="delete_film")
+     * @Route("/delete/{id}", name="delete_film")
      */
     public function deleteFilm(Film $film){
 

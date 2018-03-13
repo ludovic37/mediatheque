@@ -22,12 +22,8 @@ class LoginController extends Controller
      */
     public function home(){
         $films = $this->getDoctrine()->getRepository(Film::class)->findBy([],['sortie' => 'DESC'],5,null);
-        $series = $this->getDoctrine()->getRepository(Serie::class)->findBy([],['id' => 'DESC'],5,null);
+        $series = $this->getDoctrine()->getRepository(Serie::class)->findFiveLastSerie();
         $animes = $this->getDoctrine()->getRepository(Anime::class)->findBy([],['id' => 'DESC'],5,null);
-
-        //$films = $this->getDoctrine()->getRepository(Film::class)->findBy([], ['sortie' => 'DESC'], 5, null);
-        //$series = $this->getDoctrine()->getRepository(Serie::class)->findBy([], ['sortie' => 'DESC'], 5, null);
-        //$animes = $this->getDoctrine()->getRepository(Anime::class)->findBy([], ['sortie' => 'DESC'], 5, null);
 
         return $this->render('home.html.twig', array("films" => $films, "series" => $series, "animes" => $animes));
     }

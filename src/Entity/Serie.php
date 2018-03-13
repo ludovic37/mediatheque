@@ -194,5 +194,21 @@ class Serie
         $this->user_serie = $user_serie;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie): void
+    {
+        $this->categorie = $categorie;
+    }
+
     // add your own fields
 }

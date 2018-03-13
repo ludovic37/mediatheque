@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block serie_nav %}active{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-9">
+            <a href="{{ path('add_episode_serie', { 'id': serie.id }) }}"><button type="submit" class="btn btn-default">Add Episode</button></a>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="row">
+                    <div class="col-xs-8 col-sm-2">
+                        <img src="{{ serie.img }}" width="100" height="150">
+                    </div>
+                    <div class="col-xs-4 col-sm-10">
+                        <h2>{{ serie.name }}</h2>
+                        <p>{{ serie.description }}</p>
+
+                        <p>Acteur: {{ serie.acteur }}</p>
+
+
+
+                    </div>
+                    <div class="col-xs-4 col-sm-10">Liste des episode</div>
+                    {% for episode in serie.episode %}
+                        <div class="col-xs-4 col-sm-10">
+                            <li>
+                                <a href="{{ path('detail_episode_serie', { 'id': episode.id }) }}"> {{ episode.episode }} - {{ episode.name }}  </a>
+                            </li>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

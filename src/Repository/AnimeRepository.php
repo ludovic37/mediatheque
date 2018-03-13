@@ -19,6 +19,17 @@ class AnimeRepository extends ServiceEntityRepository
         parent::__construct($registry, Anime::class);
     }
 
+    public function findFiveLastAnime(){
+        return $this->createQueryBuilder('a')
+            ->join('a.episode','e')
+            ->where('a.id = e.serie')
+            ->orderBy('e.sortie', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /*
     public function findBySomething($value)
     {

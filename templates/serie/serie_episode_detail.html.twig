@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block serie_nav %}active{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <h2>Episode {{ episode.episode }} - {{ episode.name }}</h2>
+            <p>{{ episode.description }}</p>
+            <p>Date de sortie: {{ episode.sortie|date('Y-m-d') }}</p>
+            <p>Durée: {{ episode.duree }} min</p>
+
+        </div>
+    </div>
+
+{% endblock %}
