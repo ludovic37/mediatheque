@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block film_nav %}active{% endblock %}
+
+{% block body %}
+
+    {# todo 5 dernier film sortie#}
+
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="row">
+                    <div class="col-xs-8 col-sm-2">
+                        <img src="{{ film.img }}" width="100" height="150">
+                    </div>
+                    <div class="col-xs-4 col-sm-10">
+                        <h2>{{ film.name }}</h2>
+                        <a href="{{ path('edit_film', { 'id': film.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-edit"></button></a>
+                        <a href="{{ path('delete_film', { 'id': film.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-remove"></button></a>
+                        <p>{{ film.description }}</p>
+
+                        <p>Durée: {{ film.duree }} min</p>
+                        <p>Acteur: {{ film.acteur }}</p>
+                        <p>Sortie: {{ film.sortie|date('Y-m-d') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
