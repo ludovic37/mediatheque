@@ -18,9 +18,14 @@ class Serie
     private $id;
 
     /**
-     * @ORM\ Column(type="integer")
+     * @ORM\ Column(type="string")
      */
-    private $episode;
+    private $name;
+
+    /**
+     * @ORM\ Column(type="string")
+     */
+    private $img;
 
     /**
      * @ORM\ Column(type="text")
@@ -28,34 +33,29 @@ class Serie
     private $description;
 
     /**
-     * @ORM\ Column(type="integer")
-     */
-    private $duree;
-
-    /**
      * @ORM\ Column(type="string")
      */
     private $acteur;
 
     /**
-     * @ORM\ Column(type="date")
+     * @ORM\OneToMany( targetEntity="UserSerie" ,mappedBy="serie");
      */
-    private $sortie;
-
-    /**
-     * @ORM\ManyToOne( targetEntity="Media" ,inversedBy="serie")
-     ∗ @ORM\JoinColumn(name="media_id", referencedColumnName="id")
-     */
-    private $media;
+    private $user_serie;
 
     /**
      * @ORM\ManyToMany(targetEntity="TypeSerie")
      */
     private $categorie;
 
+    /**
+     * @ORM\OneToMany( targetEntity="SerieEpisode" ,mappedBy="serie");
+     */
+    private $episode;
+
     public function __construct ()
     {
         $this->categorie = new ArrayCollection();
+        $this->episode = new ArrayCollection();
     }
 
     /**
@@ -149,17 +149,49 @@ class Serie
     /**
      * @return mixed
      */
-    public function getMedia()
+    public function getName()
     {
-        return $this->media;
+        return $this->name;
     }
 
     /**
-     * @param mixed $media
+     * @param mixed $name
      */
-    public function setMedia($media): void
+    public function setName($name): void
     {
-        $this->media = $media;
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param mixed $img
+     */
+    public function setImg($img): void
+    {
+        $this->img = $img;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserSerie()
+    {
+        return $this->user_serie;
+    }
+
+    /**
+     * @param mixed $user_serie
+     */
+    public function setUserSerie($user_serie): void
+    {
+        $this->user_serie = $user_serie;
     }
 
     // add your own fields

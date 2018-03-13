@@ -6,7 +6,18 @@
  * Time: 11:20
  */
 
-class AdminController
+namespace App\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/admin")
+ * @Security("has_role('ROLE_ADMIN')")
+ *
+ */
+class AdminController extends Controller
 {
 
 }

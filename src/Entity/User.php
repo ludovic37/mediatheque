@@ -47,13 +47,25 @@ class User
     private $token;
 
     /**
-     * @ORM\OneToMany( targetEntity="UserMedia" ,mappedBy="user");
+     * @ORM\OneToMany( targetEntity="UserFilm" ,mappedBy="user");
      */
-    private $user_media;
+    private $user_film;
+
+    /**
+     * @ORM\OneToMany( targetEntity="UserSerie" ,mappedBy="user");
+     */
+    private $user_serie;
+
+    /**
+     * @ORM\OneToMany( targetEntity="UserAnime" ,mappedBy="user");
+     */
+    private $user_anime;
 
     public function __construct ()
     {
-        $this->user_media = new ArrayCollection();
+        $this->user_film = new ArrayCollection();
+        $this->user_serie = new ArrayCollection();
+        $this->user_anime = new ArrayCollection();
     }
 
 

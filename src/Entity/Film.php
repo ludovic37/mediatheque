@@ -18,6 +18,20 @@ class Film
     private $id;
 
     /**
+     * @ORM\ Column(type="string")
+     */
+    private $name;
+
+    /**
+     * @ORM\ Column(type="string")
+     */
+    private $img;
+
+    /**
+     * @ORM\ Column(type="text")
+     */
+    private $description;
+    /**
      * @ORM\ Column(type="integer")
      */
     private $duree; // en minute
@@ -44,11 +58,9 @@ class Film
     }
 
     /**
-     * One Film has Media.
-     * @ORM\OneToOne(targetEntity="Media")
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     * @ORM\OneToMany( targetEntity="UserFilm" ,mappedBy="film");
      */
-    private $media;
+    private $user_film;
 
     /**
      * @return mixed
@@ -109,17 +121,81 @@ class Film
     /**
      * @return mixed
      */
-    public function getMedia()
+    public function getName()
     {
-        return $this->media;
+        return $this->name;
     }
 
     /**
-     * @param mixed $media
+     * @param mixed $name
      */
-    public function setMedia($media): void
+    public function setName($name): void
     {
-        $this->media = $media;
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param mixed $img
+     */
+    public function setImg($img): void
+    {
+        $this->img = $img;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserFilm()
+    {
+        return $this->user_film;
+    }
+
+    /**
+     * @param mixed $user_film
+     */
+    public function setUserFilm($user_film): void
+    {
+        $this->user_film = $user_film;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie): void
+    {
+        $this->categorie = $categorie;
     } //id_medie
 
     // add your own fields

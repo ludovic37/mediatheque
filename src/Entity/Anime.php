@@ -18,9 +18,14 @@ class Anime
     private $id;
 
     /**
-     * @ORM\ Column(type="integer")
+     * @ORM\ Column(type="string")
      */
-    private $episode;
+    private $name;
+
+    /**
+     * @ORM\ Column(type="string")
+     */
+    private $img;
 
     /**
      * @ORM\ Column(type="text")
@@ -28,40 +33,24 @@ class Anime
     private $description;
 
     /**
-     * @ORM\ Column(type="integer")
-     */
-    private $duree;
-
-    /**
-     * @ORM\ManyToOne( targetEntity="Media" ,inversedBy="anime")
-     ∗ @ORM\JoinColumn(name="media_id", referencedColumnName="id")
-     */
-    private $media;
-
-    /**
      * @ORM\ManyToMany(targetEntity="TypeAnime")
      */
     private $categorie;
 
+    /**
+     * @ORM\OneToMany( targetEntity="UserAnime" ,mappedBy="anime");
+     */
+    private $user_anime;
+
+    /**
+     * @ORM\OneToMany( targetEntity="AnimeEpisode" ,mappedBy="anime");
+     */
+    private $episode;
+
     public function __construct ()
     {
         $this->categorie = new ArrayCollection();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMedia()
-    {
-        return $this->media;
-    }
-
-    /**
-     * @param mixed $media
-     */
-    public function setMedia($media): void
-    {
-        $this->media = $media;
+        $this->episode = new ArrayCollection();
     }
 
     /**
@@ -118,6 +107,70 @@ class Anime
     public function setDuree($duree): void
     {
         $this->duree = $duree;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    /**
+     * @param mixed $sortie
+     */
+    public function setSortie($sortie): void
+    {
+        $this->sortie = $sortie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param mixed $img
+     */
+    public function setImg($img): void
+    {
+        $this->img = $img;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserAnime()
+    {
+        return $this->user_anime;
+    }
+
+    /**
+     * @param mixed $user_anime
+     */
+    public function setUserAnime($user_anime): void
+    {
+        $this->user_anime = $user_anime;
     }
 
     // add your own fields
