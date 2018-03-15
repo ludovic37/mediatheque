@@ -2,65 +2,82 @@
 
 {% block body %}
 
-    <h1>Les 5 dernier film</h1>
-    {% for film in films %}
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-2">
-                        <img src="{{ film.img }}" width="100" height="150">
-                    </div>
-                    <div class="col-xs-4 col-sm-10">
-                        <a href="{{ path('detail_film', { 'id': film.id }) }}"><h2>{{ film.name }}</h2></a>
-                        <p>{{ film.description|slice(0, 200) }}...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <h1>Les 5 dernier film</h1>
+            {% for film in films %}
+                <div class="col-sm-4">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="{{ film.img }}" width="90" height="135">
+                        </div>
+                        <div class="media-body">
+                            <a href="{{ path('detail_film', { 'id': film.id }) }}"><h3
+                                        class="media-heading">{{ film.name }}</h3></a>
 
 
-    <h1>Les 5 dernière série</h1>
+                            <p>{{ film.description|slice(0, 150) }}...</p>
 
-    {% set i = 0 %}
-    {% for serie in series if i < 5 %}
-        {% set i = i + 1 %}
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-2">
-                        <img src="{{ serie.img }}" width="100" height="150">
-                    </div>
-                    <div class="col-xs-4 col-sm-10">
-                        <a href="{{ path('detail_serie', { 'id': serie.id }) }}"><h2>{{ serie.name }}</h2></a>
-                        <p>{{ serie.description|slice(0, 200) }}...</p>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
+    </div>
 
-    {% endfor %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+
+            <h1>Les 5 dernière série</h1>
+            {% set i = 0 %}
+            {% for serie in series if i < 5 %}
+                {% set i = i + 1 %}
+                <div class="col-sm-4">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="{{ serie.img }}" width="90" height="135">
+                        </div>
+                        <div class="media-body">
+                            <a href="{{ path('detail_serie', { 'id': serie.id }) }}"><h3
+                                        class="media-heading">{{ serie.name }}</h3></a>
 
 
-    <h1>Les 5 dernier anime</h1>
-    {# todo 5 dernier anime sortie#}
-    {% set j = 0 %}
-    {% for anime in animes if j < 5 %}
-        {% set j = j + 1 %}
+                            <p>{{ serie.description|slice(0, 150) }}...</p>
 
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-2">
-                        <img src="{{ anime.img }}" width="100" height="150">
-                    </div>
-                    <div class="col-xs-4 col-sm-10">
-                        <a href="{{ path('detail_anime', { 'id': anime.id }) }}"><h2>{{ anime.name }}</h2></a>
-                        <p>{{ anime.description|slice(0, 200) }}...</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <h1>Les 5 dernier anime</h1>
+
+            {% set j = 0 %}
+            {% for anime in animes if j < 5 %}
+                {% set j = j + 1 %}
+
+                <div class="col-sm-4">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="{{ anime.img }}" width="90" height="135">
+                        </div>
+                        <div class="media-body">
+                            <a href="{{ path('detail_anime', { 'id': anime.id }) }}"><h3
+                                        class="media-heading">{{ anime.name }}</h3></a>
+
+
+                            <p>{{ anime.description|slice(0, 150) }}...</p>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
