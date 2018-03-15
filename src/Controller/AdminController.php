@@ -28,7 +28,7 @@ class AdminController extends Controller
      * @Route("/", name="admin")
      */
     public function admin(){
-        $users = $this->getDoctrine()->getRepository(User::class)->findAllAnime();;
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();;
 
         $userID = $this->getUser()->getId();
 

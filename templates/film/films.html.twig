@@ -1,7 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block film_nav %}active{% endblock %}
+{% block title %} {{ parent() }} - Film {% endblock %}
 
 {% block body %}
+
+    {% for message in app.session.flashBag.get("delete") %}
+        {{ message }}
+    {% endfor %}
+    {% for message in app.session.flashBag.get("update") %}
+        {{ message }}
+    {% endfor %}
+    {% for message in app.session.flashBag.get("ajout") %}
+        {{ message }}
+    {% endfor %}
+
     <div class="row">
 
         <div class="col-sm-2 col-sm-offset-9">
@@ -29,7 +41,7 @@
                             </a>
                             <a href="{{ path('delete_film', { 'id': film.id }) }}">
                                 <button type="submit"
-                                        class="btn btn-default btn-xs glyphicon glyphicon-remove"></button>
+                                        class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
                             </a>
                         </div>
                     </div>

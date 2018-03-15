@@ -39,26 +39,17 @@ class FilmController extends Controller
 
         $film = new Film();
 
-        // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
         $form = $this->createForm(FormFilmType::class, $film);
 
         $form->handleRequest($request);
 
-        // the isSubmitted() method is completely optional because the other
-        // isValid() method already checks whether the form is submitted.
-        // However, we explicitly add it to improve code readability.
-        // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($film);
             $em->flush();
 
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
-            // See https://symfony.com/doc/current/book/controller.html#flash-messages
-            //$this->addFlash('success', 'post.created_successfully');
+            $this->addFlash("ajout", "Film Ajouter");
 
             return $this->redirectToRoute('films');
         }
@@ -79,29 +70,17 @@ class FilmController extends Controller
      * @Route("/edit/{id}", name="edit_film")
      */
     public function editFilm(Film $film, Request $request){
-        //$films = $this->getDoctrine()->getRepository(Media::class)->findAllFilm();
-        //$film = new Film();
-
-        // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
         $form = $this->createForm(FormFilmType::class, $film);
 
         $form->handleRequest($request);
 
-        // the isSubmitted() method is completely optional because the other
-        // isValid() method already checks whether the form is submitted.
-        // However, we explicitly add it to improve code readability.
-        // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($film);
             $em->flush();
 
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
-            // See https://symfony.com/doc/current/book/controller.html#flash-messages
-            //$this->addFlash('success', 'post.created_successfully');
+            $this->addFlash("update", "Film Modifier");
 
             return $this->redirectToRoute('films');
         }
@@ -119,7 +98,7 @@ class FilmController extends Controller
         $entityManager->remove($film);
         $entityManager->flush();
 
-        $this->addFlash("type", "article delete");
+        $this->addFlash("delete", "Film delete");
 
         return $this->redirectToRoute('films');
 
@@ -153,6 +132,9 @@ class FilmController extends Controller
             $em->flush();
         }
 
+
+        $this->addFlash("profil", "Film Ajouter dans vu");
+
         return $this->redirectToRoute('detail_film', array("id" => $film->getId()));
     }
 
@@ -183,6 +165,8 @@ class FilmController extends Controller
             $em->persist($userFilm);
             $em->flush();
         }
+
+        $this->addFlash("profil", "Film Ajouter dans a voir");
 
         return $this->redirectToRoute('detail_film', array("id" => $film->getId()));
     }

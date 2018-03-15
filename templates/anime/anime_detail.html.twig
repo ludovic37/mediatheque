@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block anime_nav %}active{% endblock %}
+{% block title %} {{ parent() }} - Anime {% endblock %}
 
 {% block body %}
+
+    {% for message in app.session.flashBag.get("profil") %}
+        {{ message }}
+    {% endfor %}
+    {% for message in app.session.flashBag.get("ajout") %}
+        {{ message }}
+    {% endfor %}
 
     <div class="row">
         <div class="col-sm-2 col-sm-offset-9">
@@ -20,7 +28,7 @@
 
                         <a href="{{ path('edit_anime', { 'id': anime.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-edit"></button></a>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('delete_anime', { 'id': anime.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-remove"></button></a>
+                            <a href="{{ path('delete_anime', { 'id': anime.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-trash"></button></a>
                         {% endif %}
 
                         <div class="pull-right">

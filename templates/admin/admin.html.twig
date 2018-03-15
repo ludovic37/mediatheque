@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block admin_nav %}active{% endblock %}
-
+{% block title %} {{ parent() }} - Admin {% endblock %}
 {% block body %}
 
     <h1>User</h1>
@@ -40,7 +40,7 @@
                             {{ user.role }}
                         </div>
                         <div class="col-sm-1 pull-right">
-                            <a href="{{ path('delete_user', { 'id': user.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon glyphicon-ok-circle"></button></a>
+                            <a href="{{ path('delete_user', { 'id': user.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon glyphicon-trash"></button></a>
                         </div>
                     </div>
                 </div>

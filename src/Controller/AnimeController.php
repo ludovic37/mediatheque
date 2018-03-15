@@ -27,7 +27,7 @@ class AnimeController extends Controller
      * @Route("/", name="animes")
      */
     public function anime(){
-        $animes = $this->getDoctrine()->getRepository(Anime::class)->findAll();;
+        $animes = $this->getDoctrine()->getRepository(Anime::class)->findAllAnime();;
 
         return $this->render('anime/animes.html.twig', array("animes" => $animes));
     }
@@ -48,6 +48,8 @@ class AnimeController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($anime);
             $em->flush();
+
+            $this->addFlash("ajout", "Anime Ajouter");
 
             return $this->redirectToRoute('animes');
         }
@@ -78,6 +80,9 @@ class AnimeController extends Controller
             $em->persist($anime);
             $em->flush();
 
+
+            $this->addFlash("update", "Anime modifier");
+
             return $this->redirectToRoute('animes');
         }
 
@@ -94,7 +99,7 @@ class AnimeController extends Controller
         $entityManager->remove($anime);
         $entityManager->flush();
 
-        //$this->addFlash("type", "article delete");
+        $this->addFlash("delete", "Anime Supprimer");
 
         return $this->redirectToRoute('animes');
 
@@ -117,6 +122,9 @@ class AnimeController extends Controller
             $em->persist($episode);
             $episode->setAnime($anime);
             $em->flush();
+
+
+            $this->addFlash("ajout", "Episode Ajouter ");
 
             return $this->redirectToRoute('detail_anime', ['id'=> $anime->getId()]);
         }
@@ -153,12 +161,16 @@ class AnimeController extends Controller
 
             $em->persist($userAnime);
             $em->flush();
+
         }else{
             $userAnime->setStatus('vu');
 
             $em->persist($userAnime);
             $em->flush();
         }
+
+
+        $this->addFlash("profil", "Anime ajouter dans vue");
 
         return $this->redirectToRoute('detail_anime', array("id" => $anime->getId()));
     }
@@ -170,7 +182,7 @@ class AnimeController extends Controller
 
         $user = $this->getUser();
 
-        $userSerie = $this->getDoctrine()->getRepository(UserAnime::class)
+        $userAnime = $this->getDoctrine()->getRepository(UserAnime::class)
             ->findOneBy(['user' => $user, 'anime' => $anime]);
 
         $em = $this->getDoctrine()->getManager();
@@ -189,6 +201,9 @@ class AnimeController extends Controller
             $em->persist($userAnime);
             $em->flush();
         }
+
+
+        $this->addFlash("profil", "Anime ajouter dans a voire");
 
         return $this->redirectToRoute('detail_anime', array("id" => $anime->getId()));
     }
@@ -219,6 +234,9 @@ class AnimeController extends Controller
             $em->persist($userAnime);
             $em->flush();
         }
+
+
+        $this->addFlash("profil", "Anime ajouter dans en cour");
 
         return $this->redirectToRoute('detail_anime', array("id" => $anime->getId()));
     }

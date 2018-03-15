@@ -49,6 +49,9 @@ class SerieController extends Controller
             $em->persist($serie);
             $em->flush();
 
+
+            $this->addFlash("ajout", "Serie Ajouter");
+
             return $this->redirectToRoute('series');
         }
 
@@ -79,6 +82,8 @@ class SerieController extends Controller
             $em->persist($serie);
             $em->flush();
 
+            $this->addFlash("update", "Serie Modifier");
+
             return $this->redirectToRoute('series');
         }
 
@@ -95,7 +100,7 @@ class SerieController extends Controller
         $entityManager->remove($serie);
         $entityManager->flush();
 
-        //$this->addFlash("type", "article delete");
+        $this->addFlash("delete", "Serie delete");
 
         return $this->redirectToRoute('series');
 
@@ -118,6 +123,9 @@ class SerieController extends Controller
             $em->persist($episode);
             $episode->setSerie($serie);
             $em->flush();
+
+
+            $this->addFlash("ajout", "Episode ajouter");
 
             return $this->redirectToRoute('series');
         }
@@ -161,6 +169,8 @@ class SerieController extends Controller
             $em->flush();
         }
 
+        $this->addFlash("profil", "Serie ajouter dans vue");
+
         return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
     }
 
@@ -191,6 +201,8 @@ class SerieController extends Controller
             $em->flush();
         }
 
+        $this->addFlash("profil", "Serie ajouter dans a voir");
+
         return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
     }
 
@@ -220,6 +232,8 @@ class SerieController extends Controller
             $em->persist($userSerie);
             $em->flush();
         }
+
+        $this->addFlash("profil", "Serie ajouter dans en cour");
 
         return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
     }
