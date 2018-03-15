@@ -19,6 +19,18 @@ class FilmRepository extends ServiceEntityRepository
         parent::__construct($registry, Film::class);
     }
 
+    public function findAllFilmUser($user)
+    {
+        return $this->createQueryBuilder('f')
+            ->select(['f','uf'])
+            ->join('f.userFilm', 'uf')
+            ->where('uf.user = :value')->setParameter('value', $user)
+            ->orderBy('f.sortie', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /*
     public function findBySomething($value)
     {

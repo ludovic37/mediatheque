@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 use App\Entity\Film;
+use App\Entity\User;
+use App\Entity\UserFilm;
 use App\Form\FormFilmType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/films")
- *
  */
 class FilmController extends Controller
 {
@@ -39,8 +40,7 @@ class FilmController extends Controller
         $film = new Film();
 
         // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
-        $form = $this->createForm(FormFilmType::class, $film)
-            ->add('saveAndCreateNew', SubmitType::class);
+        $form = $this->createForm(FormFilmType::class, $film);
 
         $form->handleRequest($request);
 
@@ -83,8 +83,7 @@ class FilmController extends Controller
         //$film = new Film();
 
         // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
-        $form = $this->createForm(FormFilmType::class, $film)
-            ->add('saveAndCreateNew', SubmitType::class);
+        $form = $this->createForm(FormFilmType::class, $film);
 
         $form->handleRequest($request);
 
@@ -124,5 +123,67 @@ class FilmController extends Controller
 
         return $this->redirectToRoute('films');
 
+    }
+
+    /**
+     * @Route("/vue/{id}", name="film_add_vu")
+     */
+    public function addVu(Film $film){
+
+
+        $user = $this->getUser();
+
+        $userFilm = $this->getDoctrine()->getRepository(UserFilm::class)
+            ->findOneBy(['user' => $user, 'film' => $film]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(empty($userFilm)){
+            $userFilm = new UserFilm();
+            $userFilm->setFilm($film);
+            $userFilm->setUser($user);
+            $userFilm->setStatus('vu');
+
+            $em->persist($userFilm);
+            $em->flush();
+        }else{
+            $userFilm->setStatus('vu');
+
+            $em->persist($userFilm);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('detail_film', array("id" => $film->getId()));
+    }
+
+    /**
+     * @Route("/after/{id}", name="film_add_after")
+     */
+    public function addAfter(Film $film){
+
+
+        $user = $this->getUser();
+
+        $userFilm = $this->getDoctrine()->getRepository(UserFilm::class)
+            ->findOneBy(['user' => $user, 'film' => $film]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(empty($userFilm)){
+            $userFilm = new UserFilm();
+            $userFilm->setFilm($film);
+            $userFilm->setUser($user);
+            $userFilm->setStatus('after');
+
+            $em->persist($userFilm);
+            $em->flush();
+        }else{
+            $userFilm->setStatus('after');
+
+            $em->persist($userFilm);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('detail_film', array("id" => $film->getId()));
     }
 }

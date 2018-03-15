@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block admin_nav %}active{% endblock %}
+
+{% block body %}
+
+    <div class="col-sm-offset-2 col-sm-10">
+        <h1>Ajout d'un film</h1>
+    </div>
+
+    <div class="form-horizontal">
+        {{ form_start(formulaire) }}
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label"> {{ form_label(formulaire.firstname) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(formulaire.firstname) }}
+            </div>
+            {{ form_errors(formulaire.firstname) }}
+        </div>
+
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">{{ form_label(formulaire.lastname) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(formulaire.lastname) }}
+            </div>
+            {{ form_errors(formulaire.lastname) }}
+        </div>
+
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">{{ form_label(formulaire.email) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(formulaire.email) }}
+            </div>
+            {{ form_errors(formulaire.email) }}
+        </div>
+
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">{{ form_label(formulaire.password) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(formulaire.password) }}
+            </div>
+            {{ form_errors(formulaire.password) }}
+        </div>
+
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">{{ form_label(formulaire.role) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(formulaire.role) }}
+            </div>
+            {{ form_errors(formulaire.role) }}
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Save</button>
+            </div>
+        </div>
+        {{ form_end(formulaire) }}
+    </div>
+
+{% endblock %}

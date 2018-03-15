@@ -7,8 +7,11 @@
                     <li class="{% block home_nav %}{% endblock %}"><a href="{{ path('home') }}">Home</a></li>
                     <li class="{% block film_nav %}{% endblock %}"><a href="{{ path('films') }}">Film</a></li>
                     <li class="{% block serie_nav %}{% endblock %}"><a href="{{ path('series') }}">Serie</a></li>
-                    <li class="{% block anime_nav %}{% endblock %}"><a href="{{ path('home') }}">Anime</a></li>
-                    <li class="{% block admin_nav %}{% endblock %}"><a href="{{ path('home') }}">Admin</a></li>
+                    <li class="{% block anime_nav %}{% endblock %}"><a href="{{ path('animes') }}">Anime</a></li>
+                    <li class="{% block profil_nav %}{% endblock %}"><a href="{{ path('profil') }}">Profil</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="{% block admin_nav %}{% endblock %}"><a href="{{ path('admin') }}">Admin</a></li>
+                    {% endif  %}
                     <li><a href="/logout">logout</a></li>
                 </ul>
             </div>

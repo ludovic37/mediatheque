@@ -22,13 +22,13 @@ class UserAnime
     private $status;
 
     /**
-     * @ORM\ManyToOne( targetEntity="User" ,inversedBy="user_film")
+     * @ORM\ManyToOne( targetEntity="User" ,inversedBy="userAnime")
      ∗ @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne( targetEntity="Anime" ,inversedBy="user_anime")
+     * @ORM\ManyToOne( targetEntity="Anime" ,inversedBy="userAnime")
     ∗ @ORM\JoinColumn(name="anime_id", referencedColumnName="id")
      */
     private $anime;

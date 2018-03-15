@@ -17,6 +17,16 @@
                     </div>
                     <div class="col-xs-4 col-sm-10">
                         <h2>{{ serie.name }}</h2>
+                        <a href="{{ path('edit_serie', { 'id': serie.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-edit"></button></a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('delete_serie', { 'id': serie.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-remove"></button></a>
+                        {% endif %}
+
+                        <div class="pull-right">
+                            <a href="{{ path('serie_add_vu', { 'id': serie.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon glyphicon-ok-circle"></button></a>
+                            <a href="{{ path('serie_add_after', { 'id': serie.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-time"></button></a>
+                            <a href="{{ path('serie_add_now', { 'id': serie.id }) }}"><button type="submit" class="btn btn-default glyphicon glyphicon-play-circle"></button></a>
+                        </div>
                         <p>{{ serie.description }}</p>
 
                         <p>Acteur: {{ serie.acteur }}</p>

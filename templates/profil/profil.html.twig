@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+{% block profil_nav %}active{% endblock %}
+
+{% block body %}
+
+    <h4>Mes Film vue</h4>
+    {% for userfilm in userfilms %}
+        {% if userfilm.status == "vu" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ userfilm.film.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_film', { 'id': userfilm.film.id }) }}"><h2>{{ userfilm.film.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h4>Mes Film à voir</h4>
+    {% for userfilm in userfilms %}
+        {% if userfilm.status == "after" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ userfilm.film.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_film', { 'id': userfilm.film.id }) }}"><h2>{{ userfilm.film.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <h4>Mes serie vue</h4>
+    {% for userserie in userseries %}
+        {% if userserie.status == "vu" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ userserie.serie.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}"><h2>{{ userserie.serie.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h4>Mes Serie à voir</h4>
+    {% for userserie in userseries %}
+        {% if userserie.status == "after" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ userserie.serie.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}"><h2>{{ userserie.serie.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h4>Mes Serie en cour</h4>
+    {% for userserie in userseries %}
+        {% if userserie.status == "now" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ userserie.serie.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}"><h2>{{ userserie.serie.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <h4>Mes Anime vue</h4>
+    {% for useranime in useranimes %}
+        {% if useranime.status == "vu" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ useranime.anime.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}"><h2>{{ useranime.anime.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h4>Mes Anime à voir</h4>
+    {% for useranime in useranimes %}
+        {% if useranime.status == "after" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ useranime.anime.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}"><h2>{{ useranime.anime.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h4>Mes Anime en cour</h4>
+    {% for useranime in useranimes %}
+        {% if useranime.status == "en cour" %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-1">
+                            <img src="{{ useranime.anime.img }}" width="50" height="75">
+                        </div>
+                        <div class="col-xs-4 col-sm-10">
+                            <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}"><h2>{{ useranime.anime.name }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

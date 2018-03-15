@@ -3,7 +3,6 @@
 {% block body %}
 
     <h1>Les 5 dernier film</h1>
-    {# todo 5 dernier film sortie#}
     {% for film in films %}
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
@@ -22,8 +21,10 @@
 
 
     <h1>Les 5 dernière série</h1>
-    {# todo 5 dernier serie sortie#}
-    {% for serie in series %}
+
+    {% set i = 0 %}
+    {% for serie in series if i < 5 %}
+        {% set i = i + 1 %}
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="row">
@@ -31,7 +32,7 @@
                         <img src="{{ serie.img }}" width="100" height="150">
                     </div>
                     <div class="col-xs-4 col-sm-10">
-                        <h2>{{ serie.name }}</h2>
+                        <a href="{{ path('detail_serie', { 'id': serie.id }) }}"><h2>{{ serie.name }}</h2></a>
                         <p>{{ serie.description|slice(0, 200) }}...</p>
                     </div>
                 </div>
@@ -40,9 +41,13 @@
 
     {% endfor %}
 
+
     <h1>Les 5 dernier anime</h1>
     {# todo 5 dernier anime sortie#}
-    {% for anime in animes %}
+    {% set j = 0 %}
+    {% for anime in animes if j < 5 %}
+        {% set j = j + 1 %}
+
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="row">
@@ -50,7 +55,7 @@
                         <img src="{{ anime.img }}" width="100" height="150">
                     </div>
                     <div class="col-xs-4 col-sm-10">
-                        <h2>{{ anime.name }}</h2>
+                        <a href="{{ path('detail_anime', { 'id': anime.id }) }}"><h2>{{ anime.name }}</h2></a>
                         <p>{{ anime.description|slice(0, 200) }}...</p>
                     </div>
                 </div>

@@ -19,6 +19,18 @@ class UserAnimeRepository extends ServiceEntityRepository
         parent::__construct($registry, UserAnime::class);
     }
 
+    public function findAllAnimeUser($user)
+    {
+        return $this->createQueryBuilder('uf')
+            ->join('uf.anime', 'a')
+            ->join('a.episode','e')
+            ->where('uf.user = :value')->setParameter('value', $user)
+            ->orderBy('e.sortie', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /*
     public function findBySomething($value)
     {

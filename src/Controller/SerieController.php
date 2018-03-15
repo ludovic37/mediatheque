@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Serie;
 use App\Entity\SerieEpisode;
+use App\Entity\UserSerie;
 use App\Form\FormEpisodeSerieType;
 use App\Form\FormSerieType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,7 +27,7 @@ class SerieController extends Controller
      * @Route("/", name="series")
      */
     public function serie(){
-        $series = $this->getDoctrine()->getRepository(Serie::class)->findAll();;
+        $series = $this->getDoctrine()->getRepository(Serie::class)->findAllSerie();;
 
         return $this->render('serie/series.html.twig', array("series" => $series));
     }
@@ -126,10 +127,100 @@ class SerieController extends Controller
     }
 
     /**
-     * @Route("/datail/episode/{id}", name="detail_episode_serie")
+     * @Route("/detail/episode/{id}", name="detail_episode_serie")
      */
     public function detailEpisodeSerie(SerieEpisode $episode){
 
         return $this->render('serie/serie_episode_detail.html.twig', array("episode" => $episode));
+    }
+
+    /**
+     * @Route("/vue/{id}", name="serie_add_vu")
+     */
+    public function addVu(Serie $serie){
+
+        $user = $this->getUser();
+
+        $userSerie = $this->getDoctrine()->getRepository(UserSerie::class)
+            ->findOneBy(['user' => $user, 'serie' => $serie]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(empty($userSerie)){
+            $userSerie = new UserSerie();
+            $userSerie->setSerie($serie);
+            $userSerie->setUser($user);
+            $userSerie->setStatus('vu');
+
+            $em->persist($userSerie);
+            $em->flush();
+        }else{
+            $userSerie->setStatus('vu');
+
+            $em->persist($userSerie);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
+    }
+
+    /**
+     * @Route("/after/{id}", name="serie_add_after")
+     */
+    public function addAfter(Serie $serie){
+
+        $user = $this->getUser();
+
+        $userSerie = $this->getDoctrine()->getRepository(UserSerie::class)
+            ->findOneBy(['user' => $user, 'serie' => $serie]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(empty($userSerie)){
+            $userSerie = new UserSerie();
+            $userSerie->setSerie($serie);
+            $userSerie->setUser($user);
+            $userSerie->setStatus('after');
+
+            $em->persist($userSerie);
+            $em->flush();
+        }else{
+            $userSerie->setStatus('after');
+
+            $em->persist($userSerie);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
+    }
+
+    /**
+     * @Route("/now/{id}", name="serie_add_now")
+     */
+    public function addNow(Serie $serie){
+
+        $user = $this->getUser();
+
+        $userSerie = $this->getDoctrine()->getRepository(UserSerie::class)
+            ->findOneBy(['user' => $user, 'serie' => $serie]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(empty($userSerie)){
+            $userSerie = new UserSerie();
+            $userSerie->setSerie($serie);
+            $userSerie->setUser($user);
+            $userSerie->setStatus('now');
+
+            $em->persist($userSerie);
+            $em->flush();
+        }else{
+            $userSerie->setStatus('now');
+
+            $em->persist($userSerie);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
     }
 }

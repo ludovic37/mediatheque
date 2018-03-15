@@ -22,13 +22,13 @@ class UserFilm
     private $status;
 
     /**
-     * @ORM\ManyToOne( targetEntity="User" ,inversedBy="user_film")
+     * @ORM\ManyToOne( targetEntity="User" ,inversedBy="userFilm")
     ∗ @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne( targetEntity="Film" ,inversedBy="user_film")
+     * @ORM\ManyToOne( targetEntity="Film" ,inversedBy="userFilm")
     ∗ @ORM\JoinColumn(name="film_id", referencedColumnName="id")
      */
     private $film;

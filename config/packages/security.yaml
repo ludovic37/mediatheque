@@ -1,13 +1,55 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        our_db_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+        in_memory:
+            memory:
+                users:
+                    administrateur:
+                        password: '$2y$13$ArcPAkpOdqZ1rV7GSkHi8e85gHeg6pDupYkKNfhVR6dppO36aSP5O'
+                        roles: 'ROLE_SUPER_ADMIN'
+                    admin:
+                        password: '$2y$13$vpxSCud9KlTxzKWiBiFUC.U.r6J.qnzJNiD9nsj0/mSyqAs4vqACu'
+                        roles: 'ROLE_ADMIN'
+                    user1:
+                        password: '$2y$13$ZNPuRwRjMnZgbG5VwjMbf.CfkG.3ynHcin/spzffyDzpZcxbqPVAm'
+                        roles: 'ROLE_USER'
+                    user2:
+                        password: '$2y$13$H63W0/9Ia7xraUFsn1/Qzese6g93bRee6GpsO11NGZv0HmZ/nrJHu'
+                        roles: 'ROLE_USER'
+                    user3:
+                        password: '$2y$13$K2N.PviRf9vVzIrv.6kLyuQKiqf/wUnxe4n8rCCTR5rhychtE89bW'
+                        roles: 'ROLE_USER'
+
+    encoders:
+        App\Entity\User:
+            algorithm : bcrypt
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
+        ROLE_ADMIN: ROLE_USER
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+
+            pattern:    ^/
+            http_basic: ~
+            provider: our_db_provider
+
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator : security.csrf.token_manager
+            logout:
+                path: /logout
+                target: /
 
             # activate different ways to authenticate
 
@@ -22,3 +64,5 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

@@ -40,7 +40,7 @@ class Serie
     /**
      * @ORM\OneToMany( targetEntity="UserSerie" ,mappedBy="serie");
      */
-    private $user_serie;
+    private $userSerie;
 
     /**
      * @ORM\ManyToMany(targetEntity="TypeSerie")
@@ -183,15 +183,15 @@ class Serie
      */
     public function getUserSerie()
     {
-        return $this->user_serie;
+        return $this->userSerie;
     }
 
     /**
      * @param mixed $user_serie
      */
-    public function setUserSerie($user_serie): void
+    public function setUserSerie($userSerie): void
     {
-        $this->user_serie = $user_serie;
+        $this->userSerie = $userSerie;
     }
 
     /**

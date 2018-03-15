@@ -40,10 +40,10 @@ class Anime
     /**
      * @ORM\OneToMany( targetEntity="UserAnime" ,mappedBy="anime");
      */
-    private $user_anime;
+    private $userAnime;
 
     /**
-     * @ORM\OneToMany( targetEntity="AnimeEpisode" ,mappedBy="anime");
+     * @ORM\OneToMany( targetEntity="AnimeEpisode" ,mappedBy="anime", cascade={"persist", "remove"});
      */
     private $episode;
 
@@ -162,16 +162,42 @@ class Anime
      */
     public function getUserAnime()
     {
-        return $this->user_anime;
+        return $this->userAnime;
     }
 
     /**
      * @param mixed $user_anime
      */
-    public function setUserAnime($user_anime): void
+    public function setUserAnime($userAnime): void
     {
-        $this->user_anime = $user_anime;
+        $this->userAnime = $userAnime;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie): void
+    {
+        $this->categorie = $categorie;
+    }
+
+    public  function getLastDate(){
+
+        $last_date = [];
+
+        foreach ($this->getEpisode() as $episode){
+            array_push($last_date, $episode->sortie);
+        }
+
+        return max($last_date);
+    }
     // add your own fields
 }

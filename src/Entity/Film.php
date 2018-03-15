@@ -60,7 +60,7 @@ class Film
     /**
      * @ORM\OneToMany( targetEntity="UserFilm" ,mappedBy="film");
      */
-    private $user_film;
+    private $userFilm;
 
     /**
      * @return mixed
@@ -171,7 +171,7 @@ class Film
      */
     public function getUserFilm()
     {
-        return $this->user_film;
+        return $this->userFilm;
     }
 
     /**
@@ -179,7 +179,7 @@ class Film
      */
     public function setUserFilm($user_film): void
     {
-        $this->user_film = $user_film;
+        $this->userFilm = $user_film;
     }
 
     /**

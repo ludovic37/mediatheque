@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -42,30 +44,30 @@ class User
     private $role;
 
     /**
-     * @ORM\ Column(type="string")
+     * @ORM\ Column(type="string", nullable=true)
      */
     private $token;
 
     /**
      * @ORM\OneToMany( targetEntity="UserFilm" ,mappedBy="user");
      */
-    private $user_film;
+    private $userFilm;
 
     /**
      * @ORM\OneToMany( targetEntity="UserSerie" ,mappedBy="user");
      */
-    private $user_serie;
+    private $userSerie;
 
     /**
      * @ORM\OneToMany( targetEntity="UserAnime" ,mappedBy="user");
      */
-    private $user_anime;
+    private $userAnime;
 
     public function __construct ()
     {
-        $this->user_film = new ArrayCollection();
-        $this->user_serie = new ArrayCollection();
-        $this->user_anime = new ArrayCollection();
+        $this->userFilm = new ArrayCollection();
+        $this->userSerie = new ArrayCollection();
+        $this->userAnime = new ArrayCollection();
     }
 
 
@@ -173,4 +175,47 @@ class User
         return $this->id;
     }
 
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->firstname,
+            $this->lastname,
+            $this->email,
+            $this->password,
+            $this->role,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->firstname,
+            $this->lastname,
+            $this->email,
+            $this->password,
+            $this->role,
+            ) = unserialize($serialized);
+    }
+
+    public function getRoles()
+    {
+        return array($this->role);
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getSalt()
+    {
+
+    }
 }

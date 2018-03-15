@@ -1,0 +1,16 @@
+{# nomVue.html.twig #}
+{%  if erreur %}
+    <p>
+        {{ erreur.messageKey | trans ( erreur.messageData ,'security') }}
+    </p>
+{% endif %}
+<form action="{{ path("login") }}" method="post">
+    <label for="username">Nom d’utilisateur:</label>
+    <input type="text " id="username" name="_username" value="{{ login }}" />
+    <br>
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" name="_password" />
+    <input type="hidden" name="_csrf_token" value="{{csrf_token ( 'authenticate') }}">
+    <br>
+    <button type="submit">login </button>
+</form>

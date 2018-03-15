@@ -19,6 +19,18 @@ class UserSerieRepository extends ServiceEntityRepository
         parent::__construct($registry, UserSerie::class);
     }
 
+    public function findAllSerieUser($user)
+    {
+        return $this->createQueryBuilder('uf')
+            ->join('uf.serie', 's')
+            ->join('s.episode','e')
+            ->where('uf.user = :value')->setParameter('value', $user)
+            ->orderBy('e.sortie', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /*
     public function findBySomething($value)
     {

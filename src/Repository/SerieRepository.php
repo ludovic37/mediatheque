@@ -19,6 +19,15 @@ class SerieRepository extends ServiceEntityRepository
         parent::__construct($registry, Serie::class);
     }
 
+    public function findAllSerie(){
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.episode','e')
+            ->orderBy('e.sortie', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function findFiveLastSerie(){
         return $this->createQueryBuilder('s')
             ->join('s.episode','e')

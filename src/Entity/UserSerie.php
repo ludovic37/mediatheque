@@ -22,13 +22,13 @@ class UserSerie
     private $status;
 
     /**
-     * @ORM\ManyToOne( targetEntity="User" ,inversedBy="user_serie")
+     * @ORM\ManyToOne( targetEntity="User" ,inversedBy="userSerie")
     ∗ @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne( targetEntity="Serie" ,inversedBy="user_serie")
+     * @ORM\ManyToOne( targetEntity="Serie" ,inversedBy="userSerie")
     ∗ @ORM\JoinColumn(name="serie_id", referencedColumnName="id")
      */
     private $serie;
