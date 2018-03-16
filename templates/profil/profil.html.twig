@@ -7,7 +7,8 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li role="presentation" class="active"><a href="#film" aria-controls="home" role="tab" data-toggle="tab">Film</a></li>
+        <li role="presentation" class="active"><a href="#film" aria-controls="home" role="tab"
+                                                  data-toggle="tab">Film</a></li>
         <li role="presentation"><a href="#serie" aria-controls="profile" role="tab" data-toggle="tab">Serie</a></li>
         <li role="presentation"><a href="#anime" aria-controls="messages" role="tab" data-toggle="tab">Anime</a></li>
     </ul>
@@ -16,147 +17,217 @@
 
         <div role="tabpanel" class="tab-pane active" id="film">
             <h4>Mes Film vue</h4>
-            {% for userfilm in userfilms %}
-                {% if userfilm.status == "vu" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ userfilm.film.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_film', { 'id': userfilm.film.id }) }}"><h2>{{ userfilm.film.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for userfilm in userfilms %}
+                            {% if userfilm.status == "vu" %}
+                                <tr>
+                                    <td>{{ userfilm.film.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_film', { 'id': userfilm.film.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_film', { 'id': userfilm.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
             <h4>Mes Film à voir</h4>
-            {% for userfilm in userfilms %}
-                {% if userfilm.status == "after" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ userfilm.film.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_film', { 'id': userfilm.film.id }) }}"><h2>{{ userfilm.film.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for userfilm in userfilms %}
+                            {% if userfilm.status == "after" %}
+                                <tr>
+                                    <td>{{ userfilm.film.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_film', { 'id': userfilm.film.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_film', { 'id': userfilm.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="serie">
             <h4>Mes serie vue</h4>
-            {% for userserie in userseries %}
-                {% if userserie.status == "vu" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ userserie.serie.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}"><h2>{{ userserie.serie.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for userserie in userseries %}
+                            {% if userserie.status == "vu" %}
+                                <tr>
+                                    <td>{{ userserie.serie.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_serie', { 'id': userserie.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
             <h4>Mes Serie à voir</h4>
-            {% for userserie in userseries %}
-                {% if userserie.status == "after" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ userserie.serie.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}"><h2>{{ userserie.serie.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for userserie in userseries %}
+                            {% if userserie.status == "after" %}
+                                <tr>
+                                    <td>{{ userserie.serie.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_serie', { 'id': userserie.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
             <h4>Mes Serie en cour</h4>
-            {% for userserie in userseries %}
-                {% if userserie.status == "now" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ userserie.serie.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}"><h2>{{ userserie.serie.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for userserie in userseries %}
+                            {% if userserie.status == "now" %}
+                                <tr>
+                                    <td>{{ userserie.serie.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_serie', { 'id': userserie.serie.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_serie', { 'id': userserie.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="anime">
             <h4>Mes Anime vue</h4>
-            {% for useranime in useranimes %}
-                {% if useranime.status == "vu" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ useranime.anime.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}"><h2>{{ useranime.anime.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+
+                        {% for useranime in useranimes %}
+                            {% if useranime.status == "vu" %}
+                                <tr>
+                                    <td>{{ useranime.anime.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_anime', { 'id': useranime.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
             <h4>Mes Anime à voir</h4>
-            {% for useranime in useranimes %}
-                {% if useranime.status == "after" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ useranime.anime.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}"><h2>{{ useranime.anime.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for useranime in useranimes %}
+                            {% if useranime.status == "after" %}
+
+                                <tr>
+                                    <td>{{ useranime.anime.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_anime', { 'id': useranime.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
             <h4>Mes Anime en cour</h4>
-            {% for useranime in useranimes %}
-                {% if useranime.status == "en cour" %}
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-8 col-sm-1">
-                                    <img src="{{ useranime.anime.img }}" width="50" height="75">
-                                </div>
-                                <div class="col-xs-4 col-sm-10">
-                                    <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}"><h2>{{ useranime.anime.name }}</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        {% for useranime in useranimes %}
+                            {% if useranime.status == "now" %}
+                                <tr>
+                                    <td>{{ useranime.anime.name }}</td>
+                                    <td class="pull-right">
+                                        <a href="{{ path('detail_anime', { 'id': useranime.anime.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-eye-open"></button>
+                                        </a>
+                                        <a href="{{ path('delete_status_anime', { 'id': useranime.id }) }}">
+                                            <button type="submit"
+                                                    class="btn btn-default btn-xs glyphicon glyphicon-trash"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -308,12 +379,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            e.target // newly activated tab
-            e.relatedTarget // previous active tab
-        })
-    </script>
 {% endblock %}
 

@@ -6,7 +6,9 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <h1>Les 5 dernier film</h1>
+            {% set i = 0 %}
             {% for film in films %}
+                {% set i = i + 1 %}
                 <div class="col-sm-4">
                     <div class="media">
                         <div class="media-left">
@@ -23,6 +25,12 @@
 
                     </div>
                 </div>
+                {% if i == 3 %}
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -34,6 +42,8 @@
             {% set i = 0 %}
             {% for serie in series if i < 5 %}
                 {% set i = i + 1 %}
+
+
                 <div class="col-sm-4">
                     <div class="media">
                         <div class="media-left">
@@ -49,6 +59,16 @@
                         </div>
                     </div>
                 </div>
+
+
+                {% if i == 3 %}
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                {% endif %}
+
+
             {% endfor %}
         </div>
     </div>
@@ -58,9 +78,9 @@
         <div class="col-sm-10 col-sm-offset-1">
             <h1>Les 5 dernier anime</h1>
 
-            {% set j = 0 %}
-            {% for anime in animes if j < 5 %}
-                {% set j = j + 1 %}
+            {% set i = 0 %}
+            {% for anime in animes if i < 5 %}
+                {% set i = i + 1 %}
 
                 <div class="col-sm-4">
                     <div class="media">
@@ -77,6 +97,14 @@
                         </div>
                     </div>
                 </div>
+
+                {% if i == 3 %}
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                {% endif %}
+
             {% endfor %}
         </div>
     </div>

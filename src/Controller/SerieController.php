@@ -237,4 +237,19 @@ class SerieController extends Controller
 
         return $this->redirectToRoute('detail_serie', array("id" => $serie->getId()));
     }
+
+    /**
+     * @Route("/delete_status/{id}", name="delete_status_serie")
+     */
+    public function deleteStatusAnime(UserSerie $userserie){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($userserie);
+        $entityManager->flush();
+
+        $this->addFlash("delete", "Serie status supprimer");
+
+        return $this->redirectToRoute('profil');
+
+    }
 }

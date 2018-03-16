@@ -170,4 +170,19 @@ class FilmController extends Controller
 
         return $this->redirectToRoute('detail_film', array("id" => $film->getId()));
     }
+
+    /**
+     * @Route("/delete_status/{id}", name="delete_status_film")
+     */
+    public function deleteStatusAnime(UserFilm $userfilm){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($userfilm);
+        $entityManager->flush();
+
+        $this->addFlash("delete", "Film status supprimer");
+
+        return $this->redirectToRoute('profil');
+
+    }
 }

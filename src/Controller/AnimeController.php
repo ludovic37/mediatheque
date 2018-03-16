@@ -240,4 +240,19 @@ class AnimeController extends Controller
 
         return $this->redirectToRoute('detail_anime', array("id" => $anime->getId()));
     }
+
+    /**
+     * @Route("/delete_status/{id}", name="delete_status_anime")
+     */
+    public function deleteStatusAnime(UserAnime $useranime){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($useranime);
+        $entityManager->flush();
+
+        $this->addFlash("delete", "Anime status supprimer");
+
+        return $this->redirectToRoute('profil');
+
+    }
 }
