@@ -38,6 +38,9 @@
                         <p>{{ serie.description }}</p>
 
                         <p>Acteur: {{ serie.acteur }}</p>
+                        <p> Genres:
+                            {% for category in serie.categorie %} {{ category.name }}, {% endfor %}
+                        </p>
 
 
 
@@ -51,6 +54,9 @@
 
                         </div>
                     {% endfor %}
+
+
+
                 </div>
             </div>
         </div>

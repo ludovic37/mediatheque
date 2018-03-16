@@ -39,6 +39,10 @@
 
                         <p>{{ anime.description }}</p>
 
+                        <p> Genres:
+                            {% for category in anime.categorie %} {{ category.name }}, {% endfor %}
+                        </p>
+
                     </div>
                     <div class="col-xs-4 col-sm-10">Liste des episode</div>
                     {% for episode in anime.episode %}

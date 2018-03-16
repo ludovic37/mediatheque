@@ -36,6 +36,9 @@
                         <p>Durée: {{ film.duree }} min</p>
                         <p>Acteur: {{ film.acteur }}</p>
                         <p>Sortie: {{ film.sortie|date('Y-m-d') }}</p>
+                        <p> Genres:
+                            {% for category in film.categorie %} {{ category.name }}, {% endfor %}
+                        </p>
                     </div>
                 </div>
             </div>

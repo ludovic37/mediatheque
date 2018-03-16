@@ -23,7 +23,7 @@ class FormFilmType extends AbstractType
             ->add('duree', IntegerType::class)
             ->add('img', TextType::class)
             ->add('acteur', TextType::class)
-            ->add('sortie', DateType::class)
+            ->add('sortie', DateType::class, array('widget' => 'single_text'))
 
             ->add('categorie', EntityType::class, array('class' => TypeFilm::class,
                 'choice_label' => 'name',

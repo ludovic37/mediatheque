@@ -42,7 +42,6 @@ class LoginController extends Controller
         //administrateur/admin => dadfba16
         //user1/user2/user3 => user
 
-
         $erreur = $authentificateur->getLastAuthenticationError();
         $login = $authentificateur->getLastUsername();
         return $this->render('base/login.html.twig', array ("login"=>$login ,"erreur"=> $erreur ));

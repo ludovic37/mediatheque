@@ -19,7 +19,7 @@ class FormEpisodeSerieType extends AbstractType
             ->add('name',TextType::class)
             ->add('description', TextAreaType::class)
             ->add('duree', IntegerType::class)
-            ->add('sortie', DateType::class)
+            ->add('sortie', DateType::class, array('widget' => 'single_text'))
         ;
     }
 

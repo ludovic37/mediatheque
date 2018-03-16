@@ -20,9 +20,7 @@ class FormEpisodeAnimeType extends AbstractType
             ->add('name',TextType::class)
             ->add('description', TextAreaType::class)
             ->add('duree', IntegerType::class)
-            ->add('sortie', DateType::class, [
-                "years" => range(2020, 1900)
-            ])
+            ->add('sortie', DateType::class, array('widget' => 'single_text'))
         ;
     }
 
